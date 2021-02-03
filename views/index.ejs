@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+  <style>
+    *{
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <form action="/result" method="POST">
+
+    <div class="col">
+      <label for="name">Name:</label>
+      <input type="text" name="name" class="form-control" placeholder="name" aria-label="First name">
+    </div>
+
+    <label for="dlocation">Dojo Location:</label>
+    <select name="location" class="form-select" aria-label="Default select example">
+      <option selected>Open this select menu</option>
+      <option value="Mountain View">Mountain View</option>
+      <option value="View from the Sea">View from the Sea</option>
+      <option value="View from Home">View from Home</option>
+    </select>
+  
+
+    <label for="flen">Favorite Language:</label>
+    <select name="flen" class="form-select" aria-label="Default select example">
+      <option name="flen" selected>Open this select menu</option>
+      <option value="JavaScript">JavaScript</option>
+      <option value="Rubi">Rubi</option>
+      <option value="Java">Java</option>
+    </select>
+
+    <div class="form-floating">
+      <textarea name="comments" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+      <label for="comments">Comments</label>
+    </div>
+
+    <a href="/submit"><button  type="submit"  class="btn btn-primary">Submit</button> 
+  </form>
+</body>
+</html>
