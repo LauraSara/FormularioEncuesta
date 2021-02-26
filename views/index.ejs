@@ -12,52 +12,99 @@
     *{
       margin: 10px;
     }
+    body{
+      background-color: #eb4511;
+      background-image: linear-gradient(315deg, #eb4511 0%, #b02e0c 74%);
+      background-size: 100%;
+    }
+    form{
+      max-width: 700px;
+      display: block;
+      margin: auto;
+      color: ivory;
+    }
+    #res{
+      border: 1px solid black;
+      border-radius: 70px;
+      padding: 100px;
+      color: ivory;
+      font-family: monospace;
+      font-size: 20px;
+    }
+    h1{
+      display: block;
+      text-align: center;
+    }
+    
+    .btn-grad {background-image: linear-gradient(to right, #F7971E 0%, #FFD200  51%, #F7971E  100%)}
+    .btn-grad {
+      margin: 10px;
+      padding: 15px 45px;
+      text-align: center;
+      text-transform: uppercase;
+      transition: 0.5s;
+      background-size: 200% auto;
+      color: white;            
+      box-shadow: 0 0 20px #eee;
+      border-radius: 10px;
+      display: block;
+    }
+
+    .btn-grad:hover {
+      background-position: right center; /* change the direction of the change here */
+      color: #fff;
+      text-decoration: none;
+    }
+
   </style>
 </head>
 <body>
   <!--para cargar las respuestas por socket-->
-  <div>
+  <div id="res">
     <div id="datos"></div>
     <div id="suerte"></div>
   </div>
-  <form id="formulario" action="/result" method="POST">
 
-    <div class="col">
+  
+  <form id="formulario" action="/result" method="POST">
+    <h1>Dojo Form</h1>
+    <div>
       <label for="name">Name:</label>
       <input id="name" type="text" name="name" class="form-control" placeholder="name" aria-label="First name">
-    </div>
-
-    <label for="dlocation">Dojo Location:</label>
-    <select id="location" name="location" class="form-select" aria-label="Default select example">
-      <option selected>Open this select menu</option>
-      <option value="Mountain View">Mountain View</option>
-      <option value="View from the Sea">View from the Sea</option>
-      <option value="View from Home">View from Home</option>
-    </select>
   
+      <label for="dlocation">Dojo Location:</label>
+      <select id="location" name="location" class="form-select" aria-label="Default select example">
+        <option selected>Open this select menu</option>
+        <option value="Mountain View">Mountain View</option>
+        <option value="View from the Sea">View from the Sea</option>
+        <option value="View from Home">View from Home</option>
+      </select>    
+  
+      <label for="flen">Favorite Language:</label>
+      <select id="flen" name="flen" class="form-select" aria-label="Default select example">
+        <option name="flen" selected>Open this select menu</option>
+        <option value="JavaScript">JavaScript</option>
+        <option value="Rubi">Rubi</option>
+        <option value="Java">Java</option>
+      </select>
 
-    <label for="flen">Favorite Language:</label>
-    <select id="flen" name="flen" class="form-select" aria-label="Default select example">
-      <option name="flen" selected>Open this select menu</option>
-      <option value="JavaScript">JavaScript</option>
-      <option value="Rubi">Rubi</option>
-      <option value="Java">Java</option>
-    </select>
+    </div>
 
     <div class="form-floating">
       <textarea id="comments" name="comments" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
       <label for="comments">Comments</label>
     </div>
 
-    <a href="/submit"><button  type="submit"  class="btn btn-primary">Submit</button> 
+    <a href="/submit"><button  type="submit"  class="btn btn-primary btn-grad">Submit</button> 
   </form>
   <script src="/socket.io/socket.io.js"></script>
   <!-- yayaaa-->
 
   <script>
     $(document).ready(function (){
+      $('#res').hide();
         let socket = io.connect('http://localhost:8000');
-        $('#formulario').submit(function() {
+        $('#formulario').on('submit', function() {
           let info = {
             name: $('#name').val(),
             location: $('#location').val(),
@@ -71,6 +118,7 @@
         });
 
         socket.on('mensaje_actualizado', function (data) {
+          $('#res').show();
           $('#datos').html("Tus respuestas son: " + JSON.stringify(data.response));
           $('#formulario').hide();
         });
