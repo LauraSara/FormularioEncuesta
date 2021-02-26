@@ -29,7 +29,24 @@ app.post('/result', function(req, res) {
 });
 
 
-
-app.listen(8000, function() {
+const server = app.listen(8000, function() {
   console.log("listening on port 8000");
+});
+
+
+const io = require('socket.io')(server);
+
+
+io.sockets.on('connection', function(socket) {
+  socket.on("formulario_publicado", function(data){
+    console.log(data.user);
+    
+    socket.emit('mensaje_actualizado', {
+      response: data.user,
+    });
+
+    socket.emit('numero_aleatorio', {
+      random_no: Math.floor(Math.random()*1000 + 1)
+    });
+  });
 });
