@@ -68,4 +68,32 @@ io.sockets.on('connection', function(socket) {
     sumar = 0;
     io.emit('contador', sumar);
   });  
+
+  
 });  
+
+//desde aqui => colores
+let color = '';
+io.sockets.on('connection', function(socket) {
+  socket.on("fondoAzul", function(){
+    color = "blue";
+    io.emit('cambiar', color);
+  });
+
+  socket.on("fondoRosado", function(){
+    color = "pink";
+    io.emit('cambiar', color);
+  });
+
+  socket.on("fondoVerde", function(){
+    color = "green";
+    io.emit('cambiar', color);
+  });
+
+  socket.on("fondoOpcional", function(){
+    color = "linear-gradient(to right, #feac5e, #c779d0, #4bc0c8);";
+    io.emit('cambiar', color);
+  });
+
+    
+})
