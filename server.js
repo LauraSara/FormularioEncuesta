@@ -13,6 +13,10 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
+app.get('/botones', function(req, res) {
+  res.render('botones');
+});
+
 
 app.post('/result', function(req, res) {
   const info= req.body;
@@ -50,3 +54,18 @@ io.sockets.on('connection', function(socket) {
     });
   });
 });
+
+
+//desde aqui => botones epicos
+let sumar = 0;
+io.sockets.on('connection', function(socket) {
+  socket.on( "sumar", function(){
+    sumar++;
+    io.emit('contador', sumar);
+  });
+  
+  socket.on( "reiniciar", function(){
+    sumar = 0;
+    io.emit('contador', sumar);
+  });  
+});  
