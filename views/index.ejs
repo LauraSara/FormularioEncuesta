@@ -98,7 +98,6 @@
     <a href="/submit"><button  type="submit"  class="btn btn-primary btn-grad">Submit</button> 
   </form>
   <script src="/socket.io/socket.io.js"></script>
-  <!-- yayaaa-->
 
   <script>
     $(document).ready(function (){
@@ -119,19 +118,16 @@
 
         socket.on('mensaje_actualizado', function (data) {
           $('#res').show();
-          $('#datos').html("Tus respuestas son: " + JSON.stringify(data.response));
+          $('#datos').html("You emitted the following information to the server: " + JSON.stringify(data.response));
           $('#formulario').hide();
         });
 
         socket.on('numero_aleatorio', function (data) {                    
-          $('#suerte').html("Tu numero de la suerte es: " + JSON.stringify(data.random_no));            
+          $('#suerte').html("Your lucky number emitted by the server is: " + JSON.stringify(data.random_no));            
         });
     });
 
   </script>
-  
-
-
   
 </body>
 </html>
