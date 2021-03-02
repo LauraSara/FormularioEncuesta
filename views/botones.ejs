@@ -18,16 +18,20 @@
     }
     #reinicia{
       margin-left: 1030px;
-      margin-top: 300px;
+      margin-top: 100px;
     }
     #actualizaBtn{
       border-radius: 150px;
       padding: 20px;
+      animation: gradientBG 15s ease infinite;
+      
     }
     #colores{
       margin-top: 50px;
-      margin-right: 400px;
+      margin-right: 450px;
     }
+    
+    
   </style>
 </head>
 <body>
@@ -38,16 +42,20 @@
     </div>
 
     <div class="d-grid gap-2 col-6 mx-auto">
-      <button id="actualizaBtn" class="btn btn-outline-info" type="button">Actualizar</button>
+      <button id="actualizaBtn" class="btn btn-primary" type="button">Actualizar</button>
     </div>
 
     <div id="colores" class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <button id="green" class="btn btn-success" type="button">Verde</button>
-      <button id="blue" class="btn btn-primary" type="button">Azul</button>
-      <button id="pink" class="btn btn-danger" type="button">Rosado</button>
-      <button id="opcional" class="btn btn-warning" type="button">Gradiente</button>
+      <button id="green" class="colorBtn btn btn-outline-success" type="button">Verde</button>
+      <button id="blue" class="colorBtn btn btn-outline-primary" type="button">Azul</button>
+      <button id="pink" class="colorBtn btn btn-outline-danger" type="button">Rosado</button>
     </div>
-    <button id="reinicia" class="btn btn-outline-warning">Reiniciar</button>
+    <div>
+      <h5>Click aqui para cambiar color y que deje de funcionar todo :)</h5>
+      <button id="" class="btn btn-outline-warning" type="button">Gradiente</button>
+      <!--background-image: linear-gradient( 109.6deg,  rgba(255,174,0,1) 11.2%, rgba(255,0,0,1) 100.2% );-->
+    </div>
+    <button id="reinicia" class="btn btn-danger">Reiniciar</button>
   </div>  
 
   <script>
@@ -65,26 +73,13 @@
 
 
       //desde aqui colores
-
-      $('#pink').click(function(){
-        socket.emit('fondoRosado');
-      });
-      
-      $('#green').click(function(){
-        socket.emit('fondoVerde');
+      $('.colorBtn').click(function(){
+        let color = $(this).attr('id')        
+        socket.emit('changeColor', {color: color});
       });
 
-      $('#blue').click(function(){
-        socket.emit('fondoAzul');
-      });
-
-      $('#opcional').click(function(){
-        socket.emit('fondoOpcional');
-      });
-
-      socket.on('cambiar', function(color){
-        //$('body').html(`${color}`);
-        $('body').css('background-color',`${color}`);
+      socket.on('color', function(data){
+        $('body').css('background-color', data.color);
       });
 
     });
